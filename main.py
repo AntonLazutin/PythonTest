@@ -1,4 +1,3 @@
-from typing import List
 import os
 
 ru = "Russian.txt"
@@ -6,7 +5,7 @@ eng = "English.txt"
 
 
 def append_to_file(name: str, word: str):
-    
+
     with open(name, 'a', encoding="utf-8") as new_file:
         new_file.write(word)
 
@@ -33,6 +32,12 @@ if __name__ == "__main__":
             for i in elem[tab_index:].replace('\t', '').split(';'):
 
                 if i.endswith('\n'):
-                    append_to_file(ru, i)
+                    if i.startswith(' '):
+                        append_to_file(ru, f"{i[1:]}")
+                    else:
+                        append_to_file(ru, f"{i}")
                 else:
-                    append_to_file(ru, f"{i}\n")
+                    if i.startswith(' '):
+                        append_to_file(ru, f"{i[1:]}\n")
+                    else:
+                        append_to_file(ru, f"{i}\n")
